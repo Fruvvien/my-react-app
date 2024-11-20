@@ -27,9 +27,6 @@ function App(){
   )}
 
 
-}
-
-
   /* const updateName = (e: React.ChangeEvent<HTMLInputElement>) =>{
     setUser((prevUser)=> ({...prevUser, name: e.target.value }) )
   }
@@ -39,39 +36,28 @@ function App(){
 
 
   return (
-
   <>
-
-
-
     <div>
       <h2>Feldadatlista</h2>
-      <input type="text" value={newTaskName} onChange={(e) =>{
-        setNewTakName(e.target.value)
-      }} name="" id="" />
+      <input type="text" value={newTaskName} onChange={(e) =>{ setNewTakName(e.target.value)}} name="" id="" />
       <button onClick={addTask}>Hozzáadás</button>
       <ul>
-        {
-          tasks.map((task,index) =>(
-            <li key={index}>{task}</li>
-          ))
-          
-        }
-        {
-          
-          <button onClick={removeTask()}></button>
-        }
+        
+          {tasks.map((task,index) =>(
+            <li key={index}>
+              <span style={{textDecoration: task.completed? "line-through": "none"}}>
+              {task.name}
+              </span>
+              <button onClick={() => toggleTaskCompletion(index)}>
+                {task.completed ? "Visszaállítás": "Kész"}
+              </button>
+              <button onClick={() => removeTask(index)}></button>
+            </li>
+
+          )) }
       </ul>
-
-     {/*  <h2>Felhasználói adatok</h2>
-      Név: <input type="text" value={user.name} onChange={updateName} /><br />
-      Age: <input type="text" value={user.age} onChange={updateAge} />
-      <p>Név: {user.name}</p>
-      <p>Age: {user.age}</p> */}
-
-      
     </div>
-  
+    
   </>
   )
 
