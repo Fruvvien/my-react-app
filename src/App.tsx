@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef, SetStateAction} from "react";
 import Greeting from "./Greeting";
+import "./todolist.css";
 
 type Task = {name: string, completed: boolean}
 
@@ -13,7 +14,7 @@ function App(){
     const newTask: Task = {name: newTaskName, completed: false};
 
 
-    setTasks((prevTasks : any)=> [...prevTasks, newTaskName]);
+    setTasks((prevTasks : any)=> [...prevTasks, newTask]);
     setNewTakName('');
   }
 
@@ -34,7 +35,6 @@ function App(){
     setUser((prevUser)=> ({...prevUser, age: e.target.value }) )
   } */
 
-
   return (
   <>
     <div>
@@ -43,18 +43,21 @@ function App(){
       <button onClick={addTask}>Hozzáadás</button>
       <ul>
         
-          {tasks.map((task,index) =>(
-            <li key={index}>
-              <span style={{textDecoration: task.completed? "line-through": "none"}}>
+          {tasks.map((task,index) =>{
+            const taskClass = `task ${task.completed ? "completed" : ""}`;
+            return(
+            <li key={index} className={taskClass}>
+              <span >
               {task.name}
               </span>
               <button onClick={() => toggleTaskCompletion(index)}>
                 {task.completed ? "Visszaállítás": "Kész"}
               </button>
-              <button onClick={() => removeTask(index)}></button>
+              <button onClick={() => removeTask(index)}>Törlés</button>
             </li>
+            );
 
-          )) }
+          })}
       </ul>
     </div>
     
